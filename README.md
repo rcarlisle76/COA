@@ -8,6 +8,7 @@ A professional, responsive website for a medical insurance claims auditing busin
 - **Modern UI**: Clean, professional design suitable for healthcare industry
 - **Service Showcase**: Detailed presentation of claims auditing services
 - **Contact Form with Database**: Fully functional contact form that saves submissions to a database
+- **Email Notifications**: Automatic email alerts sent to coabilling@gmail.com for each new contact
 - **Contact Management System**: Admin page to view, search, and export all contact submissions
 - **CSV Export**: Export contacts for use in marketing campaigns and CRM systems
 - **Smooth Navigation**: Smooth scrolling between sections
@@ -87,6 +88,80 @@ A professional, responsive website for a medical insurance claims auditing busin
    - Contact list (admin): `http://localhost:3000/contacts.html`
 
 The database (`contacts.db`) will be created automatically on first run.
+
+## Email Notifications Setup
+
+The contact form will save submissions to the database AND send email notifications to **coabilling@gmail.com**.
+
+### Configure Email (Required for Notifications)
+
+1. **Copy the environment file**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Edit `.env` file** with your email credentials:
+   ```env
+   EMAIL_SERVICE=gmail
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASS=your-app-password
+   EMAIL_TO=coabilling@gmail.com
+   ```
+
+### Gmail Setup (Recommended)
+
+If using Gmail, you **must** use an App Password (regular password won't work):
+
+1. **Enable 2-Factor Authentication** on your Google account:
+   - Go to https://myaccount.google.com/security
+   - Enable 2-Step Verification
+
+2. **Create an App Password**:
+   - Go to https://myaccount.google.com/apppasswords
+   - Select "Mail" and "Other (Custom name)"
+   - Name it "COA Website"
+   - Click "Generate"
+   - Copy the 16-character password
+
+3. **Add to `.env` file**:
+   ```env
+   EMAIL_SERVICE=gmail
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASS=abcd efgh ijkl mnop  # 16-character app password
+   EMAIL_TO=coabilling@gmail.com
+   ```
+
+### Other Email Services
+
+You can use other email providers by changing `EMAIL_SERVICE`:
+
+**Outlook/Hotmail:**
+```env
+EMAIL_SERVICE=outlook
+EMAIL_USER=your-email@outlook.com
+EMAIL_PASS=your-password
+```
+
+**Yahoo:**
+```env
+EMAIL_SERVICE=yahoo
+EMAIL_USER=your-email@yahoo.com
+EMAIL_PASS=your-app-password  # Yahoo also requires app passwords
+```
+
+**Custom SMTP:**
+For other email providers, you can configure custom SMTP settings in `server.js`.
+
+### Testing Email
+
+After configuration:
+
+1. Restart the server: `npm start`
+2. You should see: "Email notifications enabled"
+3. Submit a test contact form on your website
+4. Check coabilling@gmail.com for the notification email
+
+**Note:** If email credentials are not configured, the system will still save contacts to the database but won't send email notifications.
 
 ## Customization Guide
 
@@ -277,6 +352,7 @@ If you prefer, you can split the frontend and backend:
 - Node.js
 - Express.js (web server framework)
 - better-sqlite3 (SQLite database)
+- Nodemailer (email notifications)
 - CORS (cross-origin resource sharing)
 
 ## Future Enhancements

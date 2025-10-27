@@ -2,9 +2,34 @@ const express = require('express');
 const Database = require('better-sqlite3');
 const cors = require('cors');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Email configuration
+// You can set these via environment variables or directly in the code
+const EMAIL_CONFIG = {
+  service: process.env.EMAIL_SERVICE || 'gmail', // 'gmail', 'outlook', etc.
+  user: process.env.EMAIL_USER || '', // Your email address
+  pass: process.env.EMAIL_PASS || '', // Your email password or app password
+  to: process.env.EMAIL_TO || 'coabilling@gmail.com' // Where to send notifications
+};
+
+// Create email transporter
+let transporter = null;
+if (EMAIL_CONFIG.user && EMAIL_CONFIG.pass) {
+  transporter = nodemailer.createTransport({
+    service: EMAIL_CONFIG.service,
+    auth: {
+      user: EMAIL_CONFIG.user,
+      pass: EMAIL_CONFIG.pass
+    }
+  });
+  console.log('Email notifications enabled');
+} else {
+  console.log('Email notifications disabled - configure EMAIL_USER and EMAIL_PASS to enable');
+}
 
 // Initialize SQLite database
 const db = new Database('contacts.db');
@@ -27,8 +52,58 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('.'));
 
+// Function to send email notification
+async function sendEmailNotification(contactData) {
+  if (!transporter) {
+    console.log('Email not configured, skipping notification');
+    return false;
+  }
+
+  try {
+    const mailOptions = {
+      from: EMAIL_CONFIG.user,
+      to: EMAIL_CONFIG.to,
+      subject: `New Contact Form Submission from ${contactData.name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong style="color: #666;">Name:</strong> ${contactData.name}</p>
+            <p style="margin: 10px 0;"><strong style="color: #666;">Email:</strong>
+              <a href="mailto:${contactData.email}" style="color: #0066cc;">${contactData.email}</a>
+            </p>
+            <p style="margin: 10px 0;"><strong style="color: #666;">Organization:</strong> ${contactData.organization || 'Not provided'}</p>
+          </div>
+
+          <div style="margin: 20px 0;">
+            <strong style="color: #666;">Message:</strong>
+            <p style="background-color: #ffffff; padding: 15px; border-left: 4px solid #0066cc; margin: 10px 0;">
+              ${contactData.message}
+            </p>
+          </div>
+
+          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #999;">
+            <p>Submitted: ${new Date().toLocaleString()}</p>
+            <p>Contact ID: ${contactData.id || 'N/A'}</p>
+          </div>
+        </div>
+      `
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log(`Email notification sent for contact: ${contactData.email}`);
+    return true;
+  } catch (error) {
+    console.error('Error sending email notification:', error);
+    return false;
+  }
+}
+
 // API endpoint to submit contact form
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, organization, message } = req.body;
 
@@ -56,6 +131,20 @@ app.post('/api/contact', (req, res) => {
     `);
 
     const result = stmt.run(name, email, organization || '', message);
+
+    // Send email notification
+    const contactData = {
+      id: result.lastInsertRowid,
+      name,
+      email,
+      organization: organization || '',
+      message
+    };
+
+    // Send email asynchronously (don't wait for it to complete)
+    sendEmailNotification(contactData).catch(err => {
+      console.error('Failed to send email notification:', err);
+    });
 
     res.json({
       success: true,
