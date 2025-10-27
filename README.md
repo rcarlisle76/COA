@@ -57,12 +57,12 @@ A professional, responsive website for a medical insurance claims auditing busin
 
 **Company Name**: Edit the following in `index.html`:
 ```html
-<h1>Claims Audit Pro</h1>  <!-- Line 16 -->
+<h1>COA Auditing</h1>  <!-- Line 15 -->
 ```
 
-**Contact Information**: Update in the Contact section (lines 147-150):
+**Contact Information**: Update in the Contact section (lines 122-124):
 ```html
-<p><strong>Email:</strong> info@claimsauditpro.com</p>
+<p><strong>Email:</strong> info@coaauditing.com</p>
 <p><strong>Phone:</strong> (555) 123-4567</p>
 <p><strong>Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM EST</p>
 ```
