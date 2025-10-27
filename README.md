@@ -62,8 +62,8 @@ A professional, responsive website for a medical insurance claims auditing busin
 
 **Contact Information**: Update in the Contact section (lines 122-124):
 ```html
-<p><strong>Email:</strong> info@coaauditing.com</p>
-<p><strong>Phone:</strong> (555) 123-4567</p>
+<p><strong>Email:</strong> coabilling@gmail.com</p>
+<p><strong>Phone:</strong> 214-901-1965</p>
 <p><strong>Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM EST</p>
 ```
 
