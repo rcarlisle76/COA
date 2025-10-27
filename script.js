@@ -13,7 +13,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Contact form handling
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     // Get form data
@@ -37,17 +37,43 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         return;
     }
 
-    // Show success message
-    showSuccessMessage();
+    // Disable submit button to prevent double submission
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
 
-    // Reset form
-    this.reset();
+    try {
+        // Send data to backend
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
 
-    // In a real implementation, you would send the data to a server
-    console.log('Form submitted:', formData);
+        const result = await response.json();
+
+        if (result.success) {
+            // Show success message
+            showSuccessMessage(result.message);
+            // Reset form
+            this.reset();
+        } else {
+            alert(result.message || 'An error occurred. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('An error occurred while submitting your message. Please try again.');
+    } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
 });
 
-function showSuccessMessage() {
+function showSuccessMessage(message) {
     // Create success message element if it doesn't exist
     let successMsg = document.querySelector('.success-message');
     if (!successMsg) {
@@ -57,7 +83,7 @@ function showSuccessMessage() {
         form.parentNode.insertBefore(successMsg, form);
     }
 
-    successMsg.textContent = 'Thank you for your message! We will get back to you within 24 hours.';
+    successMsg.textContent = message || 'Thank you for your message! We will get back to you within 24 hours.';
     successMsg.classList.add('show');
 
     // Hide message after 5 seconds

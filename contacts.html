@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List - COA Auditing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 200px;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #004a99;
+        }
+
+        .btn-secondary {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #218838;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .message-cell {
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .message-cell:hover {
+            background-color: #e8f4f8;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: #0066cc;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .detail-row {
+            margin-bottom: 1rem;
+        }
+
+        .detail-row label {
+            font-weight: 600;
+            color: #666;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-row .value {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .message-cell {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact List</h1>
+            <div class="actions">
+                <a href="/" class="btn btn-primary">Back to Website</a>
+                <button onclick="exportCSV()" class="btn btn-secondary">Export CSV</button>
+                <button onclick="loadContacts()" class="btn btn-primary">Refresh</button>
+            </div>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <h3>Total Contacts</h3>
+                <div class="number" id="totalContacts">0</div>
+            </div>
+        </div>
+
+        <input type="text" id="searchBox" class="search-box" placeholder="Search by name, email, or organization...">
+
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="loading" class="loading">Loading contacts...</div>
+
+        <div id="tableContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Organization</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for viewing full contact details -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contact Details</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allContacts = [];
+
+        // Load contacts on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadContacts();
+
+            // Add search functionality
+            document.getElementById('searchBox').addEventListener('input', filterContacts);
+        });
+
+        async function loadContacts() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const tableContainer = document.getElementById('tableContainer');
+
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            tableContainer.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/contacts');
+                const data = await response.json();
+
+                if (data.success) {
+                    allContacts = data.contacts;
+                    document.getElementById('totalContacts').textContent = data.count;
+                    displayContacts(allContacts);
+                    tableContainer.style.display = 'block';
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (err) {
+                console.error('Error loading contacts:', err);
+                error.textContent = 'Error loading contacts. Please try again.';
+                error.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayContacts(contacts) {
+            const tbody = document.getElementById('contactsTableBody');
+            tbody.innerHTML = '';
+
+            if (contacts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem;">No contacts found.</td></tr>';
+                return;
+            }
+
+            contacts.forEach(contact => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${contact.id}</td>
+                    <td>${escapeHtml(contact.name)}</td>
+                    <td>${escapeHtml(contact.email)}</td>
+                    <td>${escapeHtml(contact.organization || '-')}</td>
+                    <td class="message-cell" onclick="showContactDetails(${contact.id})" title="Click to view full message">${escapeHtml(contact.message)}</td>
+                    <td>${formatDate(contact.created_at)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function filterContacts() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+
+            const filteredContacts = allContacts.filter(contact => {
+                return contact.name.toLowerCase().includes(searchTerm) ||
+                       contact.email.toLowerCase().includes(searchTerm) ||
+                       (contact.organization && contact.organization.toLowerCase().includes(searchTerm)) ||
+                       contact.message.toLowerCase().includes(searchTerm);
+            });
+
+            displayContacts(filteredContacts);
+        }
+
+        function showContactDetails(id) {
+            const contact = allContacts.find(c => c.id === id);
+            if (!contact) return;
+
+            const modal = document.getElementById('contactModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="detail-row">
+                    <label>ID:</label>
+                    <div class="value">${contact.id}</div>
+                </div>
+                <div class="detail-row">
+                    <label>Name:</label>
+                    <div class="value">${escapeHtml(contact.name)}</div>
+                </div>
+                <div class="detail-row">
+                    <label>Email:</label>
+                    <div class="value"><a href="mailto:${contact.email}">${escapeHtml(contact.email)}</a></div>
+                </div>
+                <div class="detail-row">
+                    <label>Organization:</label>
+                    <div class="value">${escapeHtml(contact.organization || 'Not provided')}</div>
+                </div>
+                <div class="detail-row">
+                    <label>Message:</label>
+                    <div class="value">${escapeHtml(contact.message)}</div>
+                </div>
+                <div class="detail-row">
+                    <label>Submitted:</label>
+                    <div class="value">${formatDate(contact.created_at)}</div>
+                </div>
+            `;
+
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('show');
+        }
+
+        function exportCSV() {
+            window.location.href = '/api/contacts/export/csv';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
