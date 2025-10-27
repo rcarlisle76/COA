@@ -47,10 +47,10 @@ body {
     align-items: center;
 }
 
-.nav-brand h1 {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: 700;
+.nav-brand .logo {
+    height: 50px;
+    width: auto;
+    display: block;
 }
 
 .nav-menu {
@@ -375,6 +375,10 @@ section {
     .navbar .container {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .nav-brand .logo {
+        height: 40px;
     }
 
     .hero {
