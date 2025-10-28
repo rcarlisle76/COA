@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 // Email configuration from environment variables
 const EMAIL_CONFIG = {
@@ -21,7 +21,7 @@ if (EMAIL_CONFIG.user && EMAIL_CONFIG.pass) {
 }
 
 // Serverless function handler
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -126,4 +126,4 @@ module.exports = async (req, res) => {
       message: 'An error occurred while submitting your message. Please try again.'
     });
   }
-};
+}
