@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.local
+*.db
+*.sqlite
+*.sqlite3
+server.js
+contacts.html
+.git
+.gitignore
+README.md
+package-lock.json
