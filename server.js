@@ -13,7 +13,7 @@ const EMAIL_CONFIG = {
   service: process.env.EMAIL_SERVICE || 'gmail', // 'gmail', 'outlook', etc.
   user: process.env.EMAIL_USER || '', // Your email address
   pass: process.env.EMAIL_PASS || '', // Your email password or app password
-  to: process.env.EMAIL_TO || 'auditing.coa@gmail.com' // Where to send notifications
+  to: process.env.EMAIL_TO || 'coabillings@gmail.com' // Where to send notifications
 };
 
 // Create email transporter

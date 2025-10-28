@@ -8,7 +8,7 @@ A professional, responsive website for a medical insurance claims auditing busin
 - **Modern UI**: Clean, professional design suitable for healthcare industry
 - **Service Showcase**: Detailed presentation of claims auditing services
 - **Contact Form with Database**: Fully functional contact form that saves submissions to a database
-- **Email Notifications**: Automatic email alerts sent to auditing.coa@gmail.com for each new contact
+- **Email Notifications**: Automatic email alerts sent to coabillings@gmail.com for each new contact
 - **Contact Management System**: Admin page to view, search, and export all contact submissions
 - **CSV Export**: Export contacts for use in marketing campaigns and CRM systems
 - **Smooth Navigation**: Smooth scrolling between sections
@@ -91,7 +91,7 @@ The database (`contacts.db`) will be created automatically on first run.
 
 ## Email Notifications Setup
 
-The contact form will save submissions to the database AND send email notifications to **auditing.coa@gmail.com**.
+The contact form will save submissions to the database AND send email notifications to **coabillings@gmail.com**.
 
 ### Configure Email (Required for Notifications)
 
@@ -105,7 +105,7 @@ The contact form will save submissions to the database AND send email notificati
    EMAIL_SERVICE=gmail
    EMAIL_USER=your-email@gmail.com
    EMAIL_PASS=your-app-password
-   EMAIL_TO=auditing.coa@gmail.com
+   EMAIL_TO=coabillings@gmail.com
    ```
 
 ### Gmail Setup (Recommended)
@@ -128,7 +128,7 @@ If using Gmail, you **must** use an App Password (regular password won't work):
    EMAIL_SERVICE=gmail
    EMAIL_USER=your-email@gmail.com
    EMAIL_PASS=abcd efgh ijkl mnop  # 16-character app password
-   EMAIL_TO=auditing.coa@gmail.com
+   EMAIL_TO=coabillings@gmail.com
    ```
 
 ### Other Email Services
@@ -159,7 +159,7 @@ After configuration:
 1. Restart the server: `npm start`
 2. You should see: "Email notifications enabled"
 3. Submit a test contact form on your website
-4. Check auditing.coa@gmail.com for the notification email
+4. Check coabillings@gmail.com for the notification email
 
 **Note:** If email credentials are not configured, the system will still save contacts to the database but won't send email notifications.
 
@@ -174,7 +174,7 @@ After configuration:
 
 **Contact Information**: Update in the Contact section (lines 122-124):
 ```html
-<p><strong>Email:</strong> auditing.coa@gmail.com</p>
+<p><strong>Email:</strong> coabillings@gmail.com</p>
 <p><strong>Phone:</strong> 214-901-1965</p>
 <p><strong>Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM EST</p>
 ```
