@@ -318,6 +318,20 @@ section {
     opacity: 0.8;
 }
 
+.footer-nap {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.footer-nap a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer-nap a:hover {
+    text-decoration: underline;
+}
+
 /* FAQ Section */
 .faq {
     background-color: var(--bg-light);
