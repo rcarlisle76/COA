@@ -318,6 +318,69 @@ section {
     opacity: 0.8;
 }
 
+/* FAQ Section */
+.faq {
+    background-color: var(--bg-light);
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-list details {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-list details[open] {
+    box-shadow: var(--shadow);
+}
+
+.faq-list summary {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-list summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.faq-list details[open] summary::after {
+    content: '−';
+}
+
+.faq-list details[open] summary {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-answer {
+    padding: 1.25rem 1.5rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
 /* Success Message */
 .success-message {
     background-color: var(--success-color);
