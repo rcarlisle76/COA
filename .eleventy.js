@@ -10,11 +10,15 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
 
+  // Copy built Sanity Studio to /studio/ in the output
+  eleventyConfig.addPassthroughCopy({"studio/dist": "studio"});
+
   // Don't process these directories as templates
   eleventyConfig.ignores.add("server/**");
   eleventyConfig.ignores.add("node_modules/**");
   eleventyConfig.ignores.add("_site/**");
   eleventyConfig.ignores.add("api/**");
+  eleventyConfig.ignores.add("studio/**");
   eleventyConfig.ignores.add("README.md");
   eleventyConfig.ignores.add("VERCEL_DEPLOYMENT.md");
 

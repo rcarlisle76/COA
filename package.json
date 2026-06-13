@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "eleventy"
+    "build": "npm run build:studio && npm run build:site",
+    "build:studio": "cd studio && npm install && npx sanity build",
+    "build:site": "eleventy"
   },
   "keywords": [
     "medical",

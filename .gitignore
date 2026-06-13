@@ -1,8 +1,10 @@
 # Node modules
 node_modules/
+studio/node_modules/
 
-# 11ty build output
+# Build outputs
 _site/
+studio/dist/
 
 # Database files
 *.db
