@@ -80,7 +80,7 @@ function showSuccessMessage(message) {
         successMsg = document.createElement('div');
         successMsg.className = 'success-message';
         const form = document.getElementById('contactForm');
-        form.parentNode.insertBefore(successMsg, form);
+        form.insertBefore(successMsg, form.firstChild);
     }
 
     successMsg.textContent = message || 'Thank you for your message! We will get back to you within 24 hours.';
@@ -98,7 +98,7 @@ function showErrorMessage(message) {
         errorMsg = document.createElement('div');
         errorMsg.className = 'error-message';
         const form = document.getElementById('contactForm');
-        form.parentNode.insertBefore(errorMsg, form);
+        form.insertBefore(errorMsg, form.firstChild);
     }
 
     errorMsg.textContent = message;
