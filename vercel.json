@@ -3,6 +3,10 @@
   "outputDirectory": "_site",
   "rewrites": [
     {
+      "source": "/static/:path*",
+      "destination": "/studio/static/:path*"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     }
