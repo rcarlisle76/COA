@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150">
-  <!-- Blue circle background -->
-  <circle cx="60" cy="62" r="56" fill="#0066cc"/>
+  <!-- Blue square background -->
+  <rect x="0" y="0" width="120" height="150" rx="10" fill="#0066cc"/>
 
   <!-- Staff -->
   <rect x="57.5" y="14" width="5" height="76" rx="2.5" fill="white"/>
