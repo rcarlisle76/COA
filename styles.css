@@ -499,6 +499,20 @@ section {
     display: block;
 }
 
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .services-grid {

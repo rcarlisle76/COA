@@ -26,14 +26,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
     // Validate form
     if (!formData.name || !formData.email || !formData.message) {
-        alert('Please fill in all required fields.');
+        showErrorMessage('Please fill in all required fields.');
         return;
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-        alert('Please enter a valid email address.');
+        showErrorMessage('Please enter a valid email address.');
         return;
     }
 
@@ -61,11 +61,11 @@ document.getElementById('contactForm').addEventListener('submit', async function
             // Reset form
             this.reset();
         } else {
-            alert(result.message || 'An error occurred. Please try again.');
+            showErrorMessage(result.message || 'An error occurred. Please try again.');
         }
     } catch (error) {
         console.error('Error submitting form:', error);
-        alert('An error occurred while submitting your message. Please try again.');
+        showErrorMessage('An error occurred while submitting your message. Please try again.');
     } finally {
         // Re-enable submit button
         submitBtn.disabled = false;
@@ -90,6 +90,23 @@ function showSuccessMessage(message) {
     setTimeout(() => {
         successMsg.classList.remove('show');
     }, 5000);
+}
+
+function showErrorMessage(message) {
+    let errorMsg = document.querySelector('.error-message');
+    if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        const form = document.getElementById('contactForm');
+        form.parentNode.insertBefore(errorMsg, form);
+    }
+
+    errorMsg.textContent = message;
+    errorMsg.classList.add('show');
+
+    setTimeout(() => {
+        errorMsg.classList.remove('show');
+    }, 6000);
 }
 
 // Add active state to navigation on scroll

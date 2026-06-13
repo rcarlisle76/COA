@@ -1,5 +1,13 @@
 import nodemailer from 'nodemailer';
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // Email configuration from environment variables
 const EMAIL_CONFIG = {
   service: process.env.EMAIL_SERVICE || 'gmail',
@@ -65,10 +73,16 @@ export default async function handler(req, res) {
     // Send email notification
     if (transporter) {
       try {
+        const safeName = escapeHtml(name);
+        const safeEmail = escapeHtml(email);
+        const safeOrg = escapeHtml(organization || '');
+        const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+
         const mailOptions = {
           from: EMAIL_CONFIG.user,
           to: EMAIL_CONFIG.to,
-          subject: `New Contact Form Submission from ${name}`,
+          replyTo: email,
+          subject: `New Contact Form Submission from ${safeName}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 10px;">
@@ -76,17 +90,17 @@ export default async function handler(req, res) {
               </h2>
 
               <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <p style="margin: 10px 0;"><strong style="color: #666;">Name:</strong> ${name}</p>
+                <p style="margin: 10px 0;"><strong style="color: #666;">Name:</strong> ${safeName}</p>
                 <p style="margin: 10px 0;"><strong style="color: #666;">Email:</strong>
-                  <a href="mailto:${email}" style="color: #0066cc;">${email}</a>
+                  <a href="mailto:${safeEmail}" style="color: #0066cc;">${safeEmail}</a>
                 </p>
-                <p style="margin: 10px 0;"><strong style="color: #666;">Organization:</strong> ${organization || 'Not provided'}</p>
+                <p style="margin: 10px 0;"><strong style="color: #666;">Organization:</strong> ${safeOrg || 'Not provided'}</p>
               </div>
 
               <div style="margin: 20px 0;">
                 <strong style="color: #666;">Message:</strong>
                 <p style="background-color: #ffffff; padding: 15px; border-left: 4px solid #0066cc; margin: 10px 0;">
-                  ${message}
+                  ${safeMessage}
                 </p>
               </div>
 
@@ -106,7 +120,7 @@ export default async function handler(req, res) {
         });
 
       } catch (emailError) {
-        console.error('Error sending email:', emailError);
+        console.error('Email send failed — code:', emailError.code, '| message:', emailError.message, '| response:', emailError.response);
         return res.status(500).json({
           success: false,
           message: 'Failed to send email notification. Please try again or contact us directly.'
