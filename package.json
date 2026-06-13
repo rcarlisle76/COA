@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm run build:studio && npm run build:site",
-    "build:studio": "cd studio && npm install && npx sanity build",
+    "build:studio": "cd studio && npm install && npx sanity build --base-path /studio",
     "build:site": "eleventy"
   },
   "keywords": [
