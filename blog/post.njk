@@ -1,0 +1,29 @@
+---
+pagination:
+  data: posts
+  size: 1
+  alias: post
+permalink: "/blog/{{ post.slug.current }}/"
+---
+
+<article class="blog-post">
+    <div class="page-header">
+        <div class="container">
+            <div class="blog-meta">
+                <time datetime="{{ post.publishedAt | isoDate }}">{{ post.publishedAt | readableDate }}</time>
+                {% if post.author %}<span class="blog-author"> &middot; {{ post.author }}</span>{% endif %}
+            </div>
+            <h1>{{ post.title }}</h1>
+        </div>
+    </div>
+    <div class="blog-post-body">
+        <div class="container">
+            <div class="blog-content">
+                {{ post.bodyHTML | safe }}
+            </div>
+            <div class="blog-post-footer">
+                <a href="/blog/" class="btn btn-outline">&larr; Back to Blog</a>
+            </div>
+        </div>
+    </div>
+</article>

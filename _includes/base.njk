@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description or 'Expert medical insurance claims auditing in Marietta, GA. COA Auditing helps patients recover out-of-pocket expenses. Call (214) 901-1965.' }}">
+    <title>{{ title }} | COA Auditing</title>
+    <link rel="canonical" href="https://www.coabilling.com{{ page.url }}">
+    <meta property="og:title" content="{{ title }} | COA Auditing">
+    <meta property="og:description" content="{{ description or 'Expert medical insurance claims auditing in Marietta, GA.' }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.coabilling.com{{ page.url }}">
+    <meta property="og:site_name" content="COA Auditing">
+    {% if schema %}<script type="application/ld+json">{{ schema | safe }}</script>{% endif %}
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration:none;color:inherit;"><h1 style="color:var(--primary-color);">COA Auditing</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/#home">Home</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#faq">FAQ</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {{ content | safe }}
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-nap"><strong>COA Auditing</strong> &mdash; Marietta, GA &mdash; <a href="tel:+12149011965">(214) 901-1965</a> &mdash; <a href="mailto:coabillings@gmail.com">coabillings@gmail.com</a></p>
+            <p>&copy; 2025 COA Auditing. All rights reserved.</p>
+            <p class="footer-disclaimer">Professional medical claims auditing services. HIPAA compliant and confidential.</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

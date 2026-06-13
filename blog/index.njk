@@ -1,0 +1,40 @@
+---
+title: Blog
+description: Medical billing and claims auditing insights from COA Auditing in Marietta, GA.
+permalink: /blog/
+---
+
+<section class="page-header">
+    <div class="container">
+        <h1>Blog</h1>
+        <p>Medical billing insights and claims auditing tips</p>
+    </div>
+</section>
+
+<section class="blog-listing">
+    <div class="container">
+        {% if posts.length %}
+        <div class="blog-grid">
+            {% for post in posts %}
+            <article class="blog-card">
+                <div class="blog-card-body">
+                    <div class="blog-meta">
+                        <time datetime="{{ post.publishedAt | isoDate }}">{{ post.publishedAt | readableDate }}</time>
+                        {% if post.author %}<span class="blog-author"> &middot; {{ post.author }}</span>{% endif %}
+                    </div>
+                    <h2 class="blog-card-title">
+                        <a href="/blog/{{ post.slug.current }}/">{{ post.title }}</a>
+                    </h2>
+                    {% if post.excerpt %}<p class="blog-excerpt">{{ post.excerpt }}</p>{% endif %}
+                    <a href="/blog/{{ post.slug.current }}/" class="btn btn-outline">Read More</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="blog-empty">
+            <p>No posts yet — check back soon for medical billing tips and claims auditing insights.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
