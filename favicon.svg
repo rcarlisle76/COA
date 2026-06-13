@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150">
+  <!-- Blue circle background -->
+  <circle cx="60" cy="62" r="56" fill="#0066cc"/>
+
+  <!-- Staff -->
+  <rect x="57.5" y="14" width="5" height="76" rx="2.5" fill="white"/>
+
+  <!-- Wings -->
+  <path d="M60 20 C50 12 30 14 24 24 C34 18 46 17 60 23" fill="white"/>
+  <path d="M60 20 C70 12 90 14 96 24 C86 18 74 17 60 23" fill="white"/>
+
+  <!-- Snake 1: starts left, weaves right then left -->
+  <path d="M48 24 C52 31 68 35 64 43 C60 51 44 55 48 64 C52 73 68 75 64 83"
+        fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Snake 2: starts right, weaves left then right -->
+  <path d="M72 24 C68 31 52 35 56 43 C60 51 76 55 72 64 C68 73 52 75 56 83"
+        fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Snake heads at bottom -->
+  <ellipse cx="56" cy="87" rx="5" ry="4" fill="white" transform="rotate(-20 56 87)"/>
+  <ellipse cx="64" cy="87" rx="5" ry="4" fill="white" transform="rotate(20 64 87)"/>
+
+  <!-- Tongues -->
+  <line x1="52" y1="90" x2="50" y2="93" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="68" y1="90" x2="70" y2="93" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- COA text -->
+  <text x="60" y="126" text-anchor="middle"
+        font-family="Arial Black, Arial, sans-serif"
+        font-size="22" font-weight="900" fill="white" letter-spacing="2">COA</text>
+
+  <!-- LS text -->
+  <text x="60" y="146" text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="13" font-weight="bold" fill="white" letter-spacing="4">LS</text>
+</svg>
