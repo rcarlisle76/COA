@@ -1,4 +1,4 @@
-const BUSINESS_QUERY = 'COA LLC Marietta GA';
+const BUSINESS_QUERY = '(214) 901-1965';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
