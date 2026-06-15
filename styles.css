@@ -583,6 +583,62 @@ section {
     background-color: var(--white);
 }
 
+.google-rating-summary {
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+    flex-wrap: wrap;
+}
+
+.google-rating-score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.google-rating-count {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.google-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.review-stars {
+    color: #fbbc05;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.google-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.review-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.review-cta-btn {
+    font-size: 1rem;
+}
+
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
