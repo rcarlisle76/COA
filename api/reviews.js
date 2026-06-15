@@ -13,21 +13,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Restrict search to 100m around the verified listing coordinates
-    const searchRes = await fetch('https://places.googleapis.com/v1/places:searchText', {
+    // Nearby search (no name filter) to see all places at these coordinates
+    const searchRes = await fetch('https://places.googleapis.com/v1/places:searchNearby', {
       method: 'POST',
       headers: {
         'X-Goog-Api-Key': apiKey,
-        'X-Goog-FieldMask': 'places.id,places.rating,places.userRatingCount',
+        'X-Goog-FieldMask': 'places.id,places.rating,places.userRatingCount,places.displayName',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        textQuery: 'COA LLC',
-        maxResultCount: 1,
+        maxResultCount: 10,
         locationRestriction: {
           circle: {
             center: { latitude: PLACE_LAT, longitude: PLACE_LNG },
-            radius: 100.0,
+            radius: 50.0,
           },
         },
       }),
@@ -35,15 +34,22 @@ export default async function handler(req, res) {
 
     if (!searchRes.ok) {
       const text = await searchRes.text();
-      console.error('Places search error:', searchRes.status, text);
-      return res.status(502).json({ error: 'Failed to search Google Places' });
+      console.error('Nearby search error:', searchRes.status, text);
+      return res.status(502).json({ error: 'Failed to search nearby places' });
     }
 
     const searchData = await searchRes.json();
-    const place = searchData.places?.[0];
+    console.log('Nearby places found:', JSON.stringify(searchData.places?.map(p => p.displayName?.text)));
+
+    // Find COA LLC specifically, fall back to first result
+    const place = searchData.places?.find(p => p.displayName?.text === 'COA LLC')
+      ?? searchData.places?.[0];
+
     if (!place) {
-      return res.status(404).json({ error: 'Business not found in Google Places' });
+      return res.status(404).json({ error: 'No places found near business location' });
     }
+
+    console.log('Using place:', place.displayName?.text, place.id);
 
     const detailRes = await fetch(`https://places.googleapis.com/v1/places/${place.id}`, {
       headers: {
