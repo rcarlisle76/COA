@@ -1,4 +1,6 @@
-const BUSINESS_QUERY = '(214) 901-1965';
+// COA LLC Marietta GA — coordinates from verified Google Maps listing
+const PLACE_LAT = 34.0671222;
+const PLACE_LNG = -84.4949286;
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -11,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Find the verified business listing
+    // Restrict search to 100m around the verified listing coordinates
     const searchRes = await fetch('https://places.googleapis.com/v1/places:searchText', {
       method: 'POST',
       headers: {
@@ -19,7 +21,16 @@ export default async function handler(req, res) {
         'X-Goog-FieldMask': 'places.id,places.rating,places.userRatingCount',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ textQuery: BUSINESS_QUERY, maxResultCount: 1 }),
+      body: JSON.stringify({
+        textQuery: 'COA LLC',
+        maxResultCount: 1,
+        locationRestriction: {
+          circle: {
+            center: { latitude: PLACE_LAT, longitude: PLACE_LNG },
+            radius: 100.0,
+          },
+        },
+      }),
     });
 
     if (!searchRes.ok) {
@@ -34,7 +45,6 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Business not found in Google Places' });
     }
 
-    // Fetch reviews for the found listing
     const detailRes = await fetch(`https://places.googleapis.com/v1/places/${place.id}`, {
       headers: {
         'X-Goog-Api-Key': apiKey,
