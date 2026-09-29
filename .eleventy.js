@@ -6,6 +6,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("script.js");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("coa-auditing-logo.svg");
+  eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("googlea42d3f3530f10f19.html");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
@@ -19,6 +20,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("_site/**");
   eleventyConfig.ignores.add("api/**");
   eleventyConfig.ignores.add("studio/**");
+  eleventyConfig.ignores.add("Accounting/**");
   eleventyConfig.ignores.add("README.md");
   eleventyConfig.ignores.add("VERCEL_DEPLOYMENT.md");
 

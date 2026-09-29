@@ -1,3 +1,21 @@
+// Mobile navigation toggle
+const navbar = document.querySelector('.navbar');
+const navToggle = document.querySelector('.nav-toggle');
+if (navbar && navToggle) {
+    navToggle.addEventListener('click', () => {
+        const open = navbar.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    navbar.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Open menu');
+        });
+    });
+}
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -13,7 +31,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Contact form handling
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     // Get form data
@@ -133,6 +151,7 @@ function googleIconSvg() {
 }
 
 async function loadGoogleReviews() {
+    if (!document.getElementById('testimonials-grid')) return;
     try {
         const res = await fetch('/api/reviews');
         if (!res.ok) return;

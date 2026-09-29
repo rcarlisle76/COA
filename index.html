@@ -99,7 +99,12 @@
     }
     </script>
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta property="og:image" content="https://www.coabilling.com/images/coa-logo-full.png">
+    <link rel="icon" href="/images/favicon-64.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -107,16 +112,20 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h1>COA Auditing</h1>
+                <a href="/" aria-label="COA Auditing home"><img src="/images/coa-logo.png" alt="COA Auditing" class="nav-logo" width="101" height="52"></a>
             </div>
-            <ul class="nav-menu">
+            <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="/mission/">Mission</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="/blog/">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-cta">Contact Us</a></li>
             </ul>
         </div>
     </nav>
@@ -125,10 +134,19 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
+                <span class="eyebrow">Accurate billing. Real recovery. Healthier outcomes.</span>
                 <h2>Expert Medical Insurance Claims Auditing</h2>
                 <p class="hero-subtitle">Serving individual patients and medical offices across the greater Atlanta area</p>
                 <p class="hero-description">Serving Marietta, GA and the greater Atlanta area — comprehensive medical claims auditing services to help patients identify errors, recover out-of-pocket expenses, and navigate the appeals process.</p>
-                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Get a Free Consultation</a>
+                    <a href="tel:+12149011965" class="btn btn-ghost">Call (214) 901-1965</a>
+                </div>
+                <ul class="hero-trust">
+                    <li>20 years of experience</li>
+                    <li>HIPAA compliant</li>
+                    <li>Free initial consultation</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -139,7 +157,7 @@
             <h2 class="section-title">Who We Serve</h2>
             <div class="serve-grid">
                 <div class="serve-card">
-                    <div class="serve-icon">🏥</div>
+                    <div class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg></div>
                     <h3>Individual Patients</h3>
                     <p>Received a medical bill that doesn't look right? We review your Explanation of Benefits, identify overcharges and billing errors, and help you recover out-of-pocket expenses. We handle the paperwork and appeals so you don't have to.</p>
                     <ul class="serve-list">
@@ -151,7 +169,7 @@
                     <a href="#contact" class="btn btn-outline">Get Help With Your Bill</a>
                 </div>
                 <div class="serve-card">
-                    <div class="serve-icon">🏢</div>
+                    <div class="icon-badge gold" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 21v-4h6v4M12 7v4M10 9h4"/></svg></div>
                     <h3>Medical Offices &amp; Providers</h3>
                     <p>Is your practice losing revenue to claim denials, underpayments, or coding errors? We audit your claims submissions, identify revenue leakage, and implement strategies to maximize your insurance reimbursements.</p>
                     <ul class="serve-list">
@@ -172,22 +190,22 @@
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">📋</div>
+                    <div class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14l2 2 4-4"/></svg></div>
                     <h3>Claims Review & Audit</h3>
                     <p>Comprehensive review of medical claims for accuracy, coding compliance, and proper documentation.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">✓</div>
+                    <div class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
                     <h3>Compliance Assessment</h3>
                     <p>Ensure your claims meet all regulatory requirements including HIPAA, CMS guidelines, and payer policies.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">💰</div>
+                    <div class="icon-badge gold" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                     <h3>Revenue Recovery</h3>
                     <p>Identify underpayments and billing errors to recover lost out of pocket costs and optimize reimbursement.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">📊</div>
+                    <div class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
                     <h3>Denial Management</h3>
                     <p>Analyze denial patterns and implement strategies to reduce claim rejections and improve acceptance rates.</p>
                 </div>
@@ -227,6 +245,7 @@
             <div class="about-content">
                 <p>Based in Marietta, GA, COA Auditing is a medical billing professional specializing in comprehensive claims auditing for patients across the greater Atlanta area. With 20 years of experience in medical coding, compliance, and patient indemnity recovery, we help patients optimize their claims processing and minimize erroneous out-of-pocket costs.</p>
                 <p>Our mission is to provide accurate, thorough, and actionable claim audits that protect our clients from compliance risks while improving their financial outcomes. We serve patients throughout Marietta, Kennesaw, Smyrna, Roswell, Alpharetta, and the surrounding Metro Atlanta communities.</p>
+                <p><a href="/mission/" class="text-link">Read our mission statement &rarr;</a></p>
             </div>
         </div>
     </section>
@@ -382,9 +401,34 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-nap"><strong>COA Auditing</strong> &mdash; Marietta, GA &mdash; <a href="tel:+12149011965">(214) 901-1965</a> &mdash; <a href="mailto:coabillings@gmail.com">coabillings@gmail.com</a></p>
-            <p>&copy; 2025 COA Auditing. All rights reserved.</p>
-            <p class="footer-disclaimer">Professional medical claims auditing services. HIPAA compliant and confidential.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/images/coa-logo-white.png" alt="COA Auditing" class="footer-logo" width="124" height="64">
+                    <p class="footer-tagline">Accurate billing. Real recovery. Healthier outcomes.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/mission/">Our Mission</a></li>
+                        <li><a href="/#faq">FAQ</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Marietta, GA</li>
+                        <li><a href="tel:+12149011965">(214) 901-1965</a></li>
+                        <li><a href="mailto:coabillings@gmail.com">coabillings@gmail.com</a></li>
+                        <li>Mon&ndash;Fri, 8:00 AM &ndash; 5:00 PM EST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 COA Auditing. All rights reserved.</p>
+                <p>Professional medical claims auditing services. HIPAA compliant and confidential.</p>
+            </div>
         </div>
     </footer>
 

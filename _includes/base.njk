@@ -11,23 +11,33 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.coabilling.com{{ page.url }}">
     <meta property="og:site_name" content="COA Auditing">
+    <meta property="og:image" content="https://www.coabilling.com/images/coa-logo-full.png">
     {% if schema %}<script type="application/ld+json">{{ schema | safe }}</script>{% endif %}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/images/favicon-64.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <a href="/" style="text-decoration:none;color:inherit;"><h1 style="color:var(--primary-color);">COA Auditing</h1></a>
+                <a href="/" aria-label="COA Auditing home"><img src="/images/coa-logo.png" alt="COA Auditing" class="nav-logo" width="101" height="52"></a>
             </div>
-            <ul class="nav-menu">
+            <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="/#home">Home</a></li>
                 <li><a href="/#services">Services</a></li>
                 <li><a href="/#about">About</a></li>
+                <li><a href="/mission/"{% if page.url == '/mission/' %} aria-current="page"{% endif %}>Mission</a></li>
+                <li><a href="/#testimonials">Testimonials</a></li>
                 <li><a href="/#faq">FAQ</a></li>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="/#contact">Contact</a></li>
+                <li><a href="/blog/"{% if page.url.startsWith('/blog/') %} aria-current="page"{% endif %}>Blog</a></li>
+                <li><a href="/#contact" class="nav-cta">Contact Us</a></li>
             </ul>
         </div>
     </nav>
@@ -36,9 +46,34 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="footer-nap"><strong>COA Auditing</strong> &mdash; Marietta, GA &mdash; <a href="tel:+12149011965">(214) 901-1965</a> &mdash; <a href="mailto:coabillings@gmail.com">coabillings@gmail.com</a></p>
-            <p>&copy; 2025 COA Auditing. All rights reserved.</p>
-            <p class="footer-disclaimer">Professional medical claims auditing services. HIPAA compliant and confidential.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/images/coa-logo-white.png" alt="COA Auditing" class="footer-logo" width="124" height="64">
+                    <p class="footer-tagline">Accurate billing. Real recovery. Healthier outcomes.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/mission/">Our Mission</a></li>
+                        <li><a href="/#faq">FAQ</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Marietta, GA</li>
+                        <li><a href="tel:+12149011965">(214) 901-1965</a></li>
+                        <li><a href="mailto:coabillings@gmail.com">coabillings@gmail.com</a></li>
+                        <li>Mon&ndash;Fri, 8:00 AM &ndash; 5:00 PM EST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 COA Auditing. All rights reserved.</p>
+                <p>Professional medical claims auditing services. HIPAA compliant and confidential.</p>
+            </div>
         </div>
     </footer>
 
