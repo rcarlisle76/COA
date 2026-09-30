@@ -13,7 +13,7 @@ const EMAIL_CONFIG = {
   service: process.env.EMAIL_SERVICE || 'gmail',
   user: process.env.EMAIL_USER || '',
   pass: process.env.EMAIL_PASS || '',
-  to: process.env.EMAIL_TO || 'coabillings@gmail.com'
+  to: process.env.EMAIL_TO || 'info@coaauditing.com'
 };
 
 // Create email transporter
