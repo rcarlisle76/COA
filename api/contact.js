@@ -11,8 +11,9 @@ function escapeHtml(str) {
 // Email configuration from environment variables
 const EMAIL_CONFIG = {
   service: process.env.EMAIL_SERVICE || 'gmail',
-  user: process.env.EMAIL_USER || '',
-  pass: process.env.EMAIL_PASS || '',
+  user: (process.env.EMAIL_USER || '').trim(),
+  // Google shows app passwords as "abcd efgh ijkl mnop"; strip any pasted spaces/newlines
+  pass: (process.env.EMAIL_PASS || '').replace(/\s+/g, ''),
   to: process.env.EMAIL_TO || 'info@coaauditing.com'
 };
 
@@ -120,6 +121,7 @@ export default async function handler(req, res) {
         });
 
       } catch (emailError) {
+        console.error('Email auth context — user:', EMAIL_CONFIG.user, '| service:', EMAIL_CONFIG.service, '| pass length:', EMAIL_CONFIG.pass.length);
         console.error('Email send failed — code:', emailError.code, '| message:', emailError.message, '| response:', emailError.response);
         return res.status(500).json({
           success: false,
