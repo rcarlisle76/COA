@@ -1,6 +1,14 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "_site",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "(www\\.)?coabilling\\.com" }],
+      "destination": "https://www.coaauditing.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/static/:path*",
