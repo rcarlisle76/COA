@@ -4,7 +4,23 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "(www\\.)?coabilling\\.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "coabilling.com"
+        }
+      ],
+      "destination": "https://www.coaauditing.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.coabilling.com"
+        }
+      ],
       "destination": "https://www.coaauditing.com/:path*",
       "permanent": true
     }
