@@ -175,7 +175,7 @@ After configuration:
 **Contact Information**: Update in the Contact section (lines 122-124):
 ```html
 <p><strong>Email:</strong> coabillings@gmail.com</p>
-<p><strong>Phone:</strong> 214-901-1965</p>
+<p><strong>Phone:</strong> 470-210-8342</p>
 <p><strong>Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM EST</p>
 ```
 
